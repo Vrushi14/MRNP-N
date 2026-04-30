@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Color, Scene, Fog, PerspectiveCamera, Vector3 } from "three";
+import { Color, Vector3 } from "three";
 import ThreeGlobe from "three-globe";
-import { useThree, Canvas, extend, useFrame } from "@react-three/fiber";
+import { useThree, Canvas, extend } from "@react-three/fiber";
 import { OrbitControls, Html } from "@react-three/drei";
 import countries from "@/data/globe.json";
 declare module "@react-three/fiber" {
@@ -16,7 +16,6 @@ declare module "@react-three/fiber" {
 extend({ ThreeGlobe: ThreeGlobe });
 
 const RING_PROPAGATION_SPEED = 3;
-const aspect = 1.2;
 const cameraZ = 300;
 
 type Position = {
@@ -62,12 +61,10 @@ interface WorldProps {
   locations?: { name: string; lat: number; lng: number }[];
 }
 
-let numbersOfRings = [0];
-
 export function Globe(props: WorldProps) {
   const { globeConfig, data } = props;
   const globeRef = useRef<ThreeGlobe | null>(null);
-  const groupRef = useRef(null);
+  const groupRef = useRef<THREE.Group>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
   const defaultProps = {
@@ -91,7 +88,9 @@ export function Globe(props: WorldProps) {
   useEffect(() => {
     if (!globeRef.current && groupRef.current) {
       globeRef.current = new ThreeGlobe();
-      (groupRef.current as any).add(globeRef.current);
+      if (groupRef.current) {
+        groupRef.current.add(globeRef.current);
+      }
       setIsInitialized(true);
     }
   }, []);
@@ -123,10 +122,9 @@ export function Globe(props: WorldProps) {
     if (!globeRef.current || !isInitialized || !data) return;
 
     const arcs = data;
-    let points = [];
+    const points = [];
     for (let i = 0; i < arcs.length; i++) {
       const arc = arcs[i];
-      const rgb = hexToRgb(arc.color) as { r: number; g: number; b: number };
       points.push({
         size: defaultProps.pointSize,
         order: arc.order,
@@ -168,17 +166,17 @@ export function Globe(props: WorldProps) {
       .arcStartLng((d) => (d as { startLng: number }).startLng * 1)
       .arcEndLat((d) => (d as { endLat: number }).endLat * 1)
       .arcEndLng((d) => (d as { endLng: number }).endLng * 1)
-      .arcColor((e: any) => (e as { color: string }).color)
-      .arcAltitude((e) => (e as { arcAlt: number }).arcAlt * 1)
+      .arcColor((e: unknown) => (e as { color: string }).color)
+      .arcAltitude((e: unknown) => (e as { arcAlt: number }).arcAlt * 1)
       .arcStroke(() => [0.32, 0.28, 0.3][Math.round(Math.random() * 2)])
       .arcDashLength(defaultProps.arcLength)
-      .arcDashInitialGap((e) => (e as { order: number }).order * 1)
+      .arcDashInitialGap((e: unknown) => (e as { order: number }).order * 1)
       .arcDashGap(15)
       .arcDashAnimateTime(() => defaultProps.arcTime);
 
     globeRef.current
       .pointsData(filteredPoints)
-      .pointColor((e) => (e as { color: string }).color)
+      .pointColor((e: unknown) => (e as { color: string }).color)
       .pointsMerge(true)
       .pointAltitude(0.0)
       .pointRadius(2);
@@ -236,7 +234,7 @@ export function Globe(props: WorldProps) {
 
   useEffect(() => {
     if (groupRef.current) {
-      (groupRef.current as any).rotation.order = "YXZ";
+      groupRef.current.rotation.order = "YXZ";
     }
   }, []);
 
@@ -244,7 +242,7 @@ export function Globe(props: WorldProps) {
     if (groupRef.current && globeRef.current && props.activeLocation && props.locations) {
       const targetLoc = props.locations.find(l => l.name === props.activeLocation);
       if (targetLoc) {
-        const group = groupRef.current as any;
+        const group = groupRef.current;
         
         // Calculate target angles
         const camPos = new Vector3(0, 0, cameraZ); // Default camera position
@@ -281,7 +279,7 @@ export function Globe(props: WorldProps) {
   }, [props.activeLocation, props.locations]);
 
   return (
-    <group ref={groupRef as any}>
+    <group ref={groupRef}>
       {props.locations && props.locations.map(loc => (
         <GlobeLabel key={loc.name} loc={loc} activeLocation={props.activeLocation} />
       ))}
@@ -289,8 +287,7 @@ export function Globe(props: WorldProps) {
   );
 }
 
-function GlobeLabel({ loc, activeLocation }: { loc: any, activeLocation?: string }) {
-  const { camera } = useThree();
+function GlobeLabel({ loc, activeLocation }: { loc: { name: string, lat: number, lng: number }, activeLocation?: string }) {
   const labelRef = useRef<HTMLDivElement>(null);
 
   // Compute position
@@ -377,12 +374,12 @@ export function World(props: WorldProps) {
 }
 
 export function hexToRgb(hex: string) {
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
   hex = hex.replace(shorthandRegex, function (m, r, g, b) {
     return r + r + g + g + b + b;
   });
 
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
         r: parseInt(result[1], 16),

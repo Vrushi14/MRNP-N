@@ -283,7 +283,7 @@ export default function AboutPage() {
               transition={{ delay: 0.1 }}
               className="font-instrument text-sm md:text-base leading-relaxed text-gray-800"
             >
-              At MRNP & Co. LLP, our values aren't just words on paper—they're
+              At MRNP & Co. LLP, our values aren&apos;t just words on paper—they&apos;re
               the essence of how we do business and interact with our clients
               every day:
             </motion.p>

@@ -35,7 +35,7 @@ export default function Hero() {
             className="font-instrument text-base md:text-lg lg:text-xl xl:text-2xl text-white max-w-5xl mx-auto whitespace-pre-line leading-relaxed"
           >
             Smart approaches to solution with exceptional service. Talent and
-            expertise necessary to meet our clients' needs in an ever-changing
+            expertise necessary to meet our clients&apos; needs in an ever-changing
             and fast-paced environment.
           </motion.p>
           <motion.div

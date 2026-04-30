@@ -113,7 +113,7 @@ export default function ContactPage() {
                               <a href={`tel:${office.phone}`} className="hover:underline transition-all duration-300">
                                 +91 {office.phone}
                               </a>
-                              <span className="text-gray-400">//</span>
+                              <span className="text-gray-400">{"//"}</span>
                             </>
                           )}
                           <a href={`mailto:${office.email}`} className="hover:underline transition-all duration-300">
