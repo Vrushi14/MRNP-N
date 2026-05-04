@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import { servicesData } from "@/data/services";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import HereToHelp from "@/components/HereToHelp";
+import { Footer, HereToHelp } from "@/components/LazyComponents";
 import { ServiceSidebar, AnimatedSection, AnimatedImage } from "@/components/ServicePageClient";
 
 // ─── Per-service rich content ────────────────────────────────────────────────
@@ -240,17 +239,17 @@ export default async function ServicePage(props: {
       {/* ── MAIN CONTENT ── */}
       <section className="mt-20 pb-16 md:pb-20 lg:pb-24 flex-grow">
         <div className="max-w-[88rem] mx-auto px-6 md:px-12 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-3">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
 
             {/* Sidebar */}
-            <div className="lg:col-span-1">
+            <div className="w-full lg:w-[450px] shrink-0">
               <div className="lg:sticky lg:top-24">
                 <ServiceSidebar currentSlug={service.slug} />
               </div>
             </div>
 
             {/* Right content */}
-            <div className="lg:col-span-3 lg:pl-6 xl:pl-12">
+            <div className="flex-1 lg:pl-6 xl:pl-12">
               {/* Page title */}
               <h2 className="font-forum text-3xl md:text-4xl lg:text-5xl text-[#061143] mb-6 leading-tight">
                 {content.pageTitle}

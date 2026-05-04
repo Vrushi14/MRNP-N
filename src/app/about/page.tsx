@@ -223,7 +223,7 @@ export default function AboutPage() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="container mx-auto px-6 md:px-12 lg:px-16 pt-24 md:pt-32 lg:pt-40"
+          className="container mx-auto px-6 md:px-12 lg:px-16 pt-6 md:pt-8"
         >
           <div className="space-y-8 md:space-y-12">
             <motion.h2
@@ -408,7 +408,7 @@ export default function AboutPage() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-full md:w-[600px] bg-white z-[9999] shadow-xl overflow-y-auto overscroll-contain"
+              className="fixed top-0 right-0 h-full w-full md:w-[800px] lg:w-[900px] bg-white z-[9999] shadow-xl overflow-y-auto overscroll-contain"
             >
               <div className="p-2 relative text-black">
                 {/* Close Button Wrapper */}

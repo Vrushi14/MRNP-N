@@ -8,14 +8,14 @@ import { servicesData } from "@/data/services";
 export function ServiceSidebar({ currentSlug }: { currentSlug: string }) {
   return (
     <LayoutGroup>
-      <nav className="border border-gray-300 flex flex-col">
+      <nav className="flex flex-col">
         {servicesData.map((s) => {
           const isActive = s.slug === currentSlug;
           return (
             <Link
               key={s.slug}
               href={`/services/${s.slug}`}
-              className={`relative block px-6 py-5 font-instrument text-lg md:text-xl border-b border-gray-300 last:border-b-0 ${
+              className={`relative block px-6 py-2 font-instrument text-base md:text-lg ${
                 isActive ? "text-white" : "bg-white text-primaryBlue hover:bg-gray-50 transition-colors"
               }`}
             >

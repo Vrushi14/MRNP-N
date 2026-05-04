@@ -92,7 +92,7 @@ export default function WhyUs() {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
               }}
               whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              className="bg-white py-14 px-6 md:px-8 space-y-4 shadow-sm hover:shadow-2xl transition-all duration-300 group rounded-xl"
+              className="bg-white py-14 px-6 md:px-8 space-y-4 shadow-sm hover:shadow-2xl transition-all duration-300 group"
             >
               <div className="w-12 h-12 md:w-16 md:h-16">
                 <Image

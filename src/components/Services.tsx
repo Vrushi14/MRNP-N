@@ -99,7 +99,7 @@ export default function Services() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="relative mx-auto grid grid-cols-1 lg:grid-cols-2 border-t border-gray-300 overflow-hidden rounded-xl"
+          className="relative mx-auto grid grid-cols-1 lg:grid-cols-2 border-t border-gray-300"
         >
           <BorderBeam size={400} duration={12} delay={0} colorFrom="#38bdf8" colorTo="#3b82f6" />
           {services.map((service) => (
@@ -110,7 +110,7 @@ export default function Services() {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
               }}
               whileHover={{ y: -4, boxShadow: "0px 10px 30px rgba(0,0,0,0.1)" }}
-              className="group relative flex border-b border-gray-300 lg:even:border-l bg-white/40 backdrop-blur-sm hover:bg-white/60 transition-colors duration-500"
+              className="group relative flex border-b border-gray-300 bg-transparent transition-colors duration-500"
             >
               <div className="flex flex-1 flex-col p-8 lg:px-12 lg:py-16">
                 <div className="mb-6">

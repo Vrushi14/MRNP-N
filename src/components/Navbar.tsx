@@ -115,7 +115,7 @@ export default function Navbar() {
                           key={service.slug}
                           href={`/services/${service.slug}`}
                           onClick={() => setIsServicesOpen(false)}
-                          className="font-instrument text-[#061143] text-lg font-bold hover:text-[#061143]/70 transition-colors duration-200 flex items-center"
+                          className="font-instrument text-[#061143] text-lg font-normal hover:text-[#061143]/70 transition-colors duration-200 flex items-center"
                         >
                           {service.title}
                         </Link>
@@ -152,7 +152,7 @@ export default function Navbar() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -10 }}
               transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
-              className="absolute top-full right-0 mt-4 w-[280px] bg-white z-[70] rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
+              className="absolute top-full right-0 mt-1 w-[340px] bg-white z-[70] rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
             >
               {/* Close button */}
               <div className="flex justify-end px-4 pt-4 pb-1">
@@ -170,7 +170,7 @@ export default function Navbar() {
                 <Link
                   href="/"
                   onClick={() => setIsMobileOpen(false)}
-                  className="font-instrument text-primaryBlue text-base px-5 py-3.5 border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                  className="font-instrument font-normal text-primaryBlue text-base px-5 py-2 hover:bg-gray-50 transition-colors"
                 >
                   Home
                 </Link>
@@ -178,16 +178,16 @@ export default function Navbar() {
                 <Link
                   href="/about"
                   onClick={() => setIsMobileOpen(false)}
-                  className="font-instrument text-primaryBlue text-base px-5 py-3.5 border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                  className="font-instrument font-normal text-primaryBlue text-base px-5 py-2 hover:bg-gray-50 transition-colors"
                 >
                   About MRNP
                 </Link>
 
                 {/* Services accordion */}
-                <div className="border-b border-gray-100">
+                <div>
                   <button
                     onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
-                    className="w-full flex justify-between items-center font-instrument text-primaryBlue text-base px-5 py-3.5 hover:bg-gray-50 transition-colors focus:outline-none"
+                    className="w-full flex justify-between items-center font-instrument font-normal text-primaryBlue text-base px-5 py-2 hover:bg-gray-50 transition-colors focus:outline-none"
                   >
                     Services
                     <motion.span
@@ -211,7 +211,7 @@ export default function Navbar() {
                             key={service.slug}
                             href={`/services/${service.slug}`}
                             onClick={() => setIsMobileOpen(false)}
-                            className="block font-instrument text-primaryBlue text-sm px-8 py-2.5 border-b border-gray-100 last:border-b-0 hover:text-primaryBlue/70 transition-colors"
+                            className="block font-instrument font-normal text-primaryBlue text-sm px-8 py-2 hover:text-primaryBlue/70 transition-colors"
                           >
                             {service.title}
                           </Link>
@@ -224,7 +224,7 @@ export default function Navbar() {
                 <Link
                   href="/careers"
                   onClick={() => setIsMobileOpen(false)}
-                  className="font-instrument text-primaryBlue text-base px-5 py-3.5 border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                  className="font-instrument font-normal text-primaryBlue text-base px-5 py-2 hover:bg-gray-50 transition-colors"
                 >
                   Life@MRNP
                 </Link>
@@ -232,7 +232,7 @@ export default function Navbar() {
                 <Link
                   href="/who-we-serve"
                   onClick={() => setIsMobileOpen(false)}
-                  className="font-instrument text-primaryBlue text-base px-5 py-3.5 border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                  className="font-instrument font-normal text-primaryBlue text-base px-5 py-2 hover:bg-gray-50 transition-colors"
                 >
                   Who we serve
                 </Link>
@@ -240,7 +240,7 @@ export default function Navbar() {
                 <Link
                   href="/contact"
                   onClick={() => setIsMobileOpen(false)}
-                  className="font-instrument text-primaryBlue text-base px-5 py-3.5 border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                  className="font-instrument font-normal text-primaryBlue text-base px-5 py-2 hover:bg-gray-50 transition-colors"
                 >
                   Contact Us
                 </Link>

@@ -54,7 +54,7 @@ export default function HereToHelp() {
           alt=""
           width={1920}
           height={200}
-          className="w-full h-auto animate-float"
+          className="w-full h-auto"
           loading="lazy"
         />
       </div>

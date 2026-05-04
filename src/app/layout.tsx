@@ -30,6 +30,7 @@ export const metadata: Metadata = {
 };
 
 import PageTransition from "@/components/PageTransition";
+import DisclaimerPopup from "@/components/DisclaimerPopup";
 
 export default function RootLayout({
   children,
@@ -42,6 +43,7 @@ export default function RootLayout({
       className={`${forum.variable} ${instrumentSans.variable} ${interTight.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <DisclaimerPopup />
         <PageTransition>{children}</PageTransition>
       </body>
     </html>
