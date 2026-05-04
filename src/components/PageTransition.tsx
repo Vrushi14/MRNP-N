@@ -2,8 +2,6 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { useContext, useRef } from "react";
 
 // For App Router, we need to freeze the router context during exit animations
 // A simpler robust way for standard exit animations is using the pathname as key

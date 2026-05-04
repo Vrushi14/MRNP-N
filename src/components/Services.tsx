@@ -102,7 +102,7 @@ export default function Services() {
           className="relative mx-auto grid grid-cols-1 lg:grid-cols-2 border-t border-gray-300 overflow-hidden rounded-xl"
         >
           <BorderBeam size={400} duration={12} delay={0} colorFrom="#38bdf8" colorTo="#3b82f6" />
-          {services.map((service, index) => (
+          {services.map((service) => (
             <motion.div
               key={service.slug}
               variants={{

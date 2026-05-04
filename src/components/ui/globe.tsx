@@ -67,7 +67,7 @@ export function Globe(props: WorldProps) {
   const globeRef = useRef<ThreeGlobe | null>(null);
   const groupRef = useRef<Group>(null);
   const [isInitialized, setIsInitialized] = useState(false);
-  const [countries, setCountries] = useState<any>(null);
+  const [countries, setCountries] = useState<{ features: any[] } | null>(null);
 
   // Fetch globe data
   useEffect(() => {
