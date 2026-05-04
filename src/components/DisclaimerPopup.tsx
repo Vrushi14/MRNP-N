@@ -9,6 +9,7 @@ export default function DisclaimerPopup() {
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     // Check if the user has already accepted the disclaimer in this session
     const hasAccepted = sessionStorage.getItem("mrnp-disclaimer-accepted");
@@ -47,7 +48,7 @@ export default function DisclaimerPopup() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.4, type: "spring", bounce: 0 }}
-            className="relative w-full max-w-[800px] overflow-hidden rounded-xl bg-white shadow-2xl flex flex-col"
+            className="relative w-full max-w-[800px] overflow-hidden bg-white shadow-2xl flex flex-col"
           >
             {/* Header */}
             <div className="px-8 pt-8 pb-4">
