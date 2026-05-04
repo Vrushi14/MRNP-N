@@ -5,6 +5,7 @@ import { servicesData } from "@/data/services";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HereToHelp from "@/components/HereToHelp";
+import { ServiceSidebar, AnimatedSection, AnimatedImage } from "@/components/ServicePageClient";
 
 // ─── Per-service rich content ────────────────────────────────────────────────
 
@@ -14,7 +15,7 @@ type ServiceContent = {
   sections: { heading?: string; description?: string; body: string | string[] }[];
   whyTitle?: string;
   whySubtitle?: string;
-  whyCards: { title: string; body: string }[];
+  whyCards?: { title: string; body: string }[];
 };
 
 const serviceContent: Record<string, ServiceContent> = {
@@ -35,10 +36,10 @@ const serviceContent: Record<string, ServiceContent> = {
     ],
     whyTitle: "Why Choose MRNP & CO LLP for Audit & Assurance Services?",
     whySubtitle:
-      "We understand the unique needs of businesses and offer a personalized approach",
+      "We understand the unique needs of businesses and offer a personalized approach :",
     whyCards: [
       {
-        title: "Experienced & Qualified Team ",
+        title: "Experienced & Qualified Team",
         body: "Our team comprises highly skilled and experienced CAs, committed to providing exceptional service.",
       },
       {
@@ -46,7 +47,7 @@ const serviceContent: Record<string, ServiceContent> = {
         body: "We possess in-depth knowledge of various industries, ensuring a tailored audit approach that meets your specific needs.",
       },
       {
-        title: "Technology-Driven Approach",
+        title: "Technology - Driven Approach",
         body: "We leverage cutting-edge technology to streamline the audit process and enhance efficiency.",
       },
       {
@@ -66,7 +67,7 @@ const serviceContent: Record<string, ServiceContent> = {
         body: [
           "Accounting Advisory: Gain expert guidance on complex accounting issues, ensuring compliance and optimizing your financial performance.",
           "India Entry Strategy & Incubation Support: Navigate the intricacies of establishing a business in India with our comprehensive support, from market research to legal and regulatory compliance.",
-          "Start-up & Business Growth Strategies: Develop a winning roadmap for your new venture or propel your existing business forward with our strategic planning and execution expertise.",
+          "Start-up & Business Growth Strategies: Develop a winning roadmap for your new venture or propel your existing business forward with our strategic planning and expertise.",
           "Government Incentives & Grant Assistance: Identify and leverage government schemes and grants that can significantly reduce your operational costs and fuel your growth.",
           "Operational Efficiency & Process Improvement: Streamline your internal processes and workflows to boost efficiency, reduce waste, and unlock greater profitability.",
           "Risk Management & Internal Controls: Implement robust risk management frameworks and internal controls to mitigate risks and safeguard your business assets.",
@@ -76,26 +77,18 @@ const serviceContent: Record<string, ServiceContent> = {
         heading: "A Collaborative Approach to Success",
         body: "We believe in fostering a collaborative partnership with our clients. Through open communication and a deep understanding of your unique business goals, we tailor our services to address your specific needs. Our approach is designed to empower your team with the knowledge and tools needed to achieve sustainable growth.",
       },
-    ],
-    whyTitle: "Why Choose MRNP & CO LLP for Business Consultancy & Advisory?",
-    whySubtitle:
-      "Unlocking Your Growth Potential with MRNP & CO LLP",
-    whyCards: [
       {
-        title: "Holistic Expertise",
-        body: "We offer a comprehensive suite of business advisory services, eliminating the need for multiple advisors.",
+        heading: "Why Choose MRNP & CO LLP for Business Consultancy & Advisory?",
+        body: [
+          "Holistic Expertise: We offer a comprehensive suite of business advisory services, eliminating the need for multiple advisors.",
+          "Objectivity & Fresh Perspective: Our external viewpoint provides unbiased insights that internal teams may miss.",
+          "Proven Track Record: Our experience with diverse industries ensures we can develop solutions tailored to your specific challenges.",
+          "Client-Centric Approach: We prioritize building long-term partnerships and fostering your success.",
+        ],
       },
       {
-        title: "Objectivity & Fresh Perspective",
-        body: "Our external viewpoint provides unbiased insights that internal teams may miss.",
-      },
-      {
-        title: "Proven Track Record",
-        body: "Our experience with diverse industries ensures we can develop solutions tailored to your specific challenges.",
-      },
-      {
-        title: "Client-Centric Approach",
-        body: "We prioritize building long-term partnerships and fostering your success.",
+        heading: "Unlocking Your Growth Potential with MRNP & CO LLP",
+        body: "Contact MRNP & CO LLP today to schedule a consultation and explore how our Business Consultancy & Advisory services can empower your organization to achieve its full potential.",
       },
     ],
   },
@@ -114,14 +107,6 @@ const serviceContent: Record<string, ServiceContent> = {
           "Impact Analysis: We assess the potential impact of upcoming changes on your financial statements and overall operations.",
         ],
       },
-    ],
-    whyTitle: "Why Choose MRNP & CO LLP for Changes in Accounting Standards & Legislations?",
-    whySubtitle: "We understand the unique needs of businesses and offer a personalized approach",
-    whyCards: [
-      { title: "Proactive Monitoring", body: "We continuously track proposed changes from all major regulatory bodies so you are never caught off-guard." },
-      { title: "Clear Communication", body: "We translate complex regulatory language into actionable insights your team can act on immediately." },
-      { title: "Internal Assessment", body: "We identify the adjustments your organization needs to adapt seamlessly to new standards." },
-      { title: "Impact Analysis", body: "We assess how upcoming changes affect your financial statements and overall business operations." },
     ],
   },
 
@@ -146,14 +131,16 @@ const serviceContent: Record<string, ServiceContent> = {
           "Minimized Legal and Regulatory Issues: Maintaining compliance reduces the risk of hefty fines and reputational damage.",
         ],
       },
-    ],
-    whyTitle: "Why Choose MRNP & CO LLP for Governance & Risk Management?",
-    whySubtitle: "We understand the unique needs of businesses and offer a personalized approach",
-    whyCards: [
-      { title: "Customized GRC Framework", body: "We tailor our GRC solutions to your specific industry, size, and unique risk profile." },
-      { title: "Concurrent Investigative Audits", body: "Our concurrent approach ensures real-time feedback on policy adherence and operational effectiveness." },
-      { title: "Ongoing Support", body: "Our dedicated team stays updated on regulatory changes and provides continuous guidance." },
-      { title: "Value-Added Services", body: "We go beyond traditional audits with operational manual preparation, financial impact assessment, and compliance updates." },
+      {
+        heading: "MRNP & Co LLP's Approach to GRC",
+        description: "At MRNP & Co LLP, we believe in a collaborative approach to GRC. We work closely with your team to:",
+        body: [
+          "Develop a Customized GRC Framework: We tailor our solutions to your specific industry, size, and risk profile.",
+          "Implement Concurrent Investigative Audits: Our concurrent approach ensures real-time feedback on policy adherence and operational effectiveness.",
+          "Provide Ongoing Support: Our dedicated team stays updated on regulatory changes and offers ongoing guidance.",
+          "Offer Value-Added Services: We go beyond traditional audits, assisting with operational manual preparation, financial impact assessment, and continuous compliance updates.",
+        ],
+      },
     ],
   },
 
@@ -178,14 +165,6 @@ const serviceContent: Record<string, ServiceContent> = {
         ],
       },
     ],
-    whyTitle: "Why Choose MRNP & CO LLP for Management Recommendations?",
-    whySubtitle: "We understand the unique needs of businesses and offer a personalized approach",
-    whyCards: [
-      { title: "In-Depth Audit Process", body: "Our meticulous process incorporates thorough evaluation of internal controls aligned with your specific management requirements." },
-      { title: "Internal Control Optimization", body: "We identify areas to strengthen controls, mitigating risks and safeguarding your business assets." },
-      { title: "Enhanced Efficiencies", body: "We unveil opportunities to streamline your processes and maximize your bottom line." },
-      { title: "Technical Financial Expertise", body: "Expert guidance on financial statement presentation and transparent note disclosures for all stakeholders." },
-    ],
   },
 
   "Tax-Consultancy": {
@@ -203,14 +182,15 @@ const serviceContent: Record<string, ServiceContent> = {
           "Indirect Tax: Indirect taxes, such as the Goods and Services Tax (GST), can significantly impact your business operations. Our experts handle all aspects of indirect taxes, minimizing your indirect tax burden through strategic planning and ensuring accurate filing.",
         ],
       },
-    ],
-    whyTitle: "Why Choose MRNP & CO LLP for Tax Consultancy?",
-    whySubtitle: "Our expertise ensures you achieve maximum tax efficiency",
-    whyCards: [
-      { title: "Adept Professionals", body: "Our team comprises highly qualified Chartered Accountants and tax consultants who stay abreast of the latest tax laws and regulations. We are passionate about helping our clients achieve their financial goals." },
-      { title: "Tailored Solutions", body: "We understand that every client has unique financial circumstances. We take the time to understand your specific needs and tailor our services to deliver the most effective solutions." },
-      { title: "Cost-Effective Approach", body: "We offer competitive fees and work diligently to minimize your tax liability. You can be confident that you are receiving exceptional value for your investment." },
-      { title: "Client-Centric Focus", body: "We are committed to providing exceptional client service, building long-term relationships based on trust, open communication, and a genuine desire to see you succeed." },
+      {
+        heading: "MRNP & CO LLP's Tax Consultancy Expertise:",
+        description: "Adept Professionals: Our team comprises highly qualified Chartered Accountants and tax consultants who stay abreast of the latest tax laws and regulations. We are passionate about helping our clients achieve their financial goals.",
+        body: [
+          "Tailored Solutions: We understand that every client has unique financial circumstances. We take the time to understand your specific needs and tailor our services to deliver the most effective solutions.",
+          "Cost-Effective Approach: We offer competitive fees and work diligently to minimize your tax liability. You can be confident that you are receiving exceptional value for your investment.",
+          "Client-Centric Focus: We are committed to providing exceptional client service, building long-term relationships based on trust, open communication, and a genuine desire to see you succeed.",
+        ],
+      },
     ],
   },
 };
@@ -221,14 +201,6 @@ function getDefaultContent(title: string): ServiceContent {
     pageTitle: title,
     intro: "",
     sections: [],
-    whyTitle: `Why Choose MRNP & CO LLP for ${title}?`,
-    whySubtitle: "We understand the unique needs of businesses and offer a personalized approach",
-    whyCards: [
-      { title: "Expert Team", body: "Highly skilled professionals committed to delivering exceptional results." },
-      { title: "Industry Knowledge", body: "Deep expertise across a wide range of industries and business sectors." },
-      { title: "Modern Approach", body: "Leveraging the latest tools and methodologies for efficient, accurate service." },
-      { title: "Client-First Focus", body: "Personalized solutions and transparent communication at every step." },
-    ],
   };
 }
 
@@ -260,7 +232,7 @@ export default async function ServicePage(props: {
             <h1 className="font-forum text-4xl md:text-5xl lg:text-6xl xl:text-[5rem] text-white leading-tight mb-3 md:mb-5">
               {service.title}
             </h1>
-            <p className="font-instrument text-white text-base md:text-lg lg:text-xl leading-relaxed max-w-3xl">
+            <p className="font-instrument text-white text-lg md:text-xl leading-relaxed max-w-3xl">
               {service.description}
             </p>
           </div>
@@ -275,20 +247,7 @@ export default async function ServicePage(props: {
             {/* Sidebar */}
             <div className="lg:col-span-1">
               <div className="lg:sticky lg:top-24">
-                <nav className="border border-gray-300">
-                  {servicesData.map((s) => (
-                    <Link
-                      key={s.slug}
-                      href={`/services/${s.slug}`}
-                      className={`block px-6 py-5 font-instrument text-lg md:text-xl transition-colors border-b border-gray-300 last:border-b-0 ${s.slug === service.slug
-                        ? "bg-primaryBlue text-white"
-                        : "bg-white text-primaryBlue hover:bg-gray-50"
-                        }`}
-                    >
-                      {s.title}
-                    </Link>
-                  ))}
-                </nav>
+                <ServiceSidebar currentSlug={service.slug} />
               </div>
             </div>
 
@@ -307,49 +266,16 @@ export default async function ServicePage(props: {
               )}
 
               {/* Banner image */}
-              <div className="relative w-full aspect-[16/9] mb-10 overflow-hidden bg-gray-100">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 900px"
-                  priority
-                />
-              </div>
+              <AnimatedImage src={service.image} alt={service.title} />
 
               {/* Sections */}
               {content.sections.map((section, i) => (
-                <div key={i} className="mb-10">
-                  {section.heading && (
-                    <h3 className="font-forum text-2xl md:text-3xl text-[#061143] mb-5">
-                      {section.heading}
-                    </h3>
-                  )}
-                  {section.description && (
-                    <p className="font-instrument text-[#191919] text-base md:text-lg leading-relaxed mb-4">
-                      {section.description}
-                    </p>
-                  )}
-                  {Array.isArray(section.body) ? (
-                    <ul className="space-y-3 pl-6 list-disc marker:text-black font-instrument text-[#191919] text-base md:text-lg leading-relaxed">
-                      {section.body.map((item, j) => {
-                        const colonIdx = item.indexOf(":");
-                        const bold = colonIdx > -1 ? item.substring(0, colonIdx) : null;
-                        const rest = colonIdx > -1 ? item.substring(colonIdx + 1).trim() : item;
-                        return (
-                          <li key={j}>
-                            {bold && <strong>{bold}:</strong>} {rest}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  ) : (
-                    <p className="font-instrument text-[#191919] text-base md:text-lg leading-relaxed">
-                      {section.body}
-                    </p>
-                  )}
-                </div>
+                <AnimatedSection
+                  key={i}
+                  heading={section.heading}
+                  description={section.description}
+                  body={section.body}
+                />
               ))}
             </div>
           </div>
@@ -357,31 +283,35 @@ export default async function ServicePage(props: {
       </section>
 
       {/* ── WHY CHOOSE MRNP ── */}
-      <section className="bg-[#F5F5F0] py-10 md:py-14 lg:py-20">
-        <div className="container mx-auto px-6 md:px-12 lg:px-16 flex flex-col items-center justify-center space-y-10">
-          <div className="text-center lg:max-w-[80%] flex flex-col items-center space-y-3">
-            <p className="font-forum text-primaryBlue text-[2rem] md:text-[2.25rem] lg:text-[2.625rem] leading-tight text-center">
-              {content.whyTitle}
-            </p>
-            {content.whySubtitle && (
-              <p className="font-instrument text-sm md:text-xl lg:text-2xl font-medium text-[#191919] md:max-w-[80%] lg:max-w-[60%] text-center">
-                {content.whySubtitle}
-              </p>
-            )}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl">
-            {content.whyCards.map((card, i) => (
-              <div key={i} className="bg-white p-6 shadow-sm">
-                <h4 className="font-forum text-2xl text-primaryBlue mb-3">{card.title}</h4>
-                <p className="font-instrument text-[#191919] text-sm md:text-base leading-relaxed">
-                  {card.body}
+      {content.whyTitle && content.whyCards && content.whyCards.length > 0 && (
+        <section className="bg-[#F5F0E8] py-16 md:py-24">
+          <div className="container mx-auto px-6 md:px-12 lg:px-16 flex flex-col items-center justify-center">
+            <div className="text-center max-w-4xl flex flex-col items-center space-y-4 mb-14 md:mb-20">
+              <h2 className="font-forum text-[#1A2B5E] text-3xl md:text-4xl lg:text-5xl leading-[1.3] font-normal text-center">
+                {content.whyTitle}
+              </h2>
+              {content.whySubtitle && (
+                <p className="font-instrument text-[#1A2B5E] text-lg md:text-[1.25rem] font-semibold leading-[1.5] text-center max-w-3xl">
+                  {content.whySubtitle}
                 </p>
-              </div>
-            ))}
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-[1596px]">
+              {content.whyCards.map((card, i) => (
+                <div key={i} className="card text-left">
+                  <h3 className="font-forum text-[#1A2B5E] text-2xl md:text-[2.125rem] leading-[1.25] font-normal mb-5">
+                    {card.title}
+                  </h3>
+                  <p className="font-instrument text-[#3D3D3D] text-[0.875rem] md:text-[0.9375rem] leading-[1.7] font-normal">
+                    {card.body}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <HereToHelp />
       <Footer />

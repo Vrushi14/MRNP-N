@@ -137,24 +137,24 @@ const partners = [
   },
   {
     name: "Surendra Bhagat",
-    role: "CA l CS. Surendra Bhagat",
-    degree: "(Inter, B.Com) : Bangalore",
+    role: "CA . Surendra Bhagat",
+    degree: "(CS Inter, B.Com) : Bangalore",
     image: "/images/partners/03_e383209988.png",
     email: "surendra@mrnp.in",
     bio: "Based in the vibrant business hub of Bangalore, Surendra Bhagat brings a rigorous, detail-oriented approach to the firm’s Audit and Assurance division. Currently advancing through the final stages of his Chartered Accountancy qualification, he has already built an extensive professional portfolio that spans both the public and private sectors. Surendra is particularly recognized for his versatility in conducting Internal, Statutory, and Special Audits for a diverse range of companies. His ability to navigate the different regulatory expectations of government-run entities versus private corporations allows him to provide tailored oversight that ensures every client meets the highest standards of financial transparency. In addition to his audit work, Surendra maintains a deep focus on the dual pillars of Direct and Indirect Taxation. He doesn’t just manage compliance; he provides active representation for both individuals and corporate bodies, ensuring their interests are protected during tax assessments. With a rich background in financial planning and corporate taxation, he helps clients simplify complex tax laws into manageable business strategies. Known for his technical persistence and deep-dive investigative skills, Surendra has become a key asset for organizations looking for a reliable partner to manage their internal controls and fiscal health.",
   },
   {
     name: "Manoj Senghani",
-    role: "CA Inter. Manoj Senghani",
-    degree: "(M.Com) : Bangalore",
+    role: "CA . Manoj Senghani",
+    degree: "(Inter, M.Com) : Bangalore",
     image: "/images/partners/06_c8786445e8.png",
     email: "manoj@mrnp.in",
     bio: "Manoj Senghani has built a professional reputation in the Gujarat business community as a dedicated advocate for the SME (Small and Medium Enterprise) sector. Holding a Master’s degree in Commerce from Gujarat University and having completed the CA Inter course, he brings a highly practical perspective to direct and indirect taxation. Manoj understands that smaller businesses often face unique resource constraints and complex regulatory hurdles. To bridge this gap, he provides hands-on statutory reporting and audit assurance services that are designed to be as efficient as they are thorough, ensuring that his clients remain compliant without losing focus on their day-to-day operations. What sets Manoj apart is his structured, client-first approach to financial health. He specializes in creating a secure compliance framework for businesses that need clear, reliable guidance in a fast-changing tax environment. By balancing the strict requirements of statutory audits with the practical realities of running a growing company, he has become a trusted advisor for entrepreneurs who value transparency and precision. Whether he is streamlining a tax filing process or providing long-term guidance on financial reporting, Manoj is known for his commitment to delivering results that help SMEs thrive and scale with confidence.",
   },
   {
     name: "Dipak Limbani",
-    role: "CA Int. Dipak Limbani",
-    degree: "(B.Com) : Bhuj",
+    role: "CA . Dipak Limbani",
+    degree: "(Inter, B.Com) : Bhuj",
     image: "/images/partners/05_c440765b56.png",
     email: "dipak@mrnp.in",
     bio: "Serving as a senior associate in the Bhuj region, Dipak Limbani provides a vital link between private enterprise and government regulatory bodies. He has carved out a specialized niche in facilitating government subsidy assistance, helping businesses navigate the complex application processes for new projects, large-scale expansions, and modernization efforts. For organizations looking to scale, Dipak’s deep understanding of the incentive landscape is a significant asset, ensuring that companies capture the financial support they are entitled to while remaining fully compliant with state and central guidelines. Beyond his work with government incentives, Dipak manages a diverse portfolio of core financial services. He is a key advisor during the incorporation phase of new businesses and provides ongoing support in Transaction Consulting and Audit and Assurance. By combining his practical experience in Direct and Indirect Taxation with a focus on project-based growth, he offers a holistic approach to business consultancy. His clients value him not just for his technical accuracy in tax and audit matters, but for his proactive ability to find the financial avenues—such as subsidies and strategic planning—that help a business move from a concept to a successful operation.",
@@ -176,7 +176,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="font-forum text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white leading-[1.1] mb-8"
+              className="font-forum text-4xl md:text-5xl lg:text-6xl xl:text-[5rem] 2xl:text-[6.5rem] md:leading-tight lg:leading-[5rem] xl:leading-[6.5rem] bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent pb-2"
             >
               Empowering Financial Futures.
             </motion.h1>
@@ -184,7 +184,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="font-instrument text-white text-lg md:text-xl lg:text-2xl leading-relaxed max-w-4xl"
+              className="font-instrument text-base md:text-lg lg:text-xl text-white max-w-4xl leading-relaxed"
             >
               We see each client as unique, with their own set of goals and
               challenges. That&apos;s why we don&apos;t offer a one-size-fits-all solution.
@@ -195,30 +195,36 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Overlapping Image Section */}
-      <div className="relative -mt-24 sm:-mt-32 md:-mt-40 lg:-mt-48 z-20 px-6 md:px-12 lg:px-16 max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative w-full"
-        >
-          <div className="relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
-            <Image
-              src="/images/about-group.png"
-              alt="About MRNP Group"
-              width={1920}
-              height={1080}
-              className="w-full h-auto"
-              priority
-            />
-          </div>
-        </motion.div>
-      </div>
+      {/* Commitment Section with Overlapping Image */}
+      <section className="bg-[#F5F5F0] pb-16 md:pb-20 lg:pb-24">
+        <div className="relative -mt-24 sm:-mt-32 md:-mt-40 lg:-mt-48 z-20 px-6 md:px-12 lg:px-16 max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="relative w-full"
+          >
+            <div className="relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+              <Image
+                src="/images/about-group.png"
+                alt="About MRNP Group"
+                width={1920}
+                height={1080}
+                className="w-full h-auto"
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
+        </div>
 
-      {/* Commitment Section */}
-      <section className="bg-[#F5F5F0] pt-24 md:pt-32 lg:pt-40 pb-16 md:pb-20 lg:pb-24">
-        <div className="container mx-auto px-6 md:px-12 lg:px-16">
+        <motion.div 
+          initial={{ opacity: 0, x: -60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="container mx-auto px-6 md:px-12 lg:px-16 pt-24 md:pt-32 lg:pt-40"
+        >
           <div className="space-y-8 md:space-y-12">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
@@ -261,7 +267,7 @@ export default function AboutPage() {
               </motion.p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Values Section */}
@@ -289,14 +295,23 @@ export default function AboutPage() {
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 border-t border-gray-200 max-w-7xl mx-auto">
+          <motion.div 
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.1 } }
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 border-t border-gray-200 max-w-7xl mx-auto"
+          >
             {values.map((value, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                variants={{
+                  hidden: { opacity: 0, y: 25 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                }}
                 className={`p-8 md:p-12 lg:p-16 flex flex-col space-y-4 border-b border-gray-200 ${index % 2 === 0 ? "md:border-r" : ""
                   }`}
               >
@@ -317,7 +332,7 @@ export default function AboutPage() {
                 </p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -332,14 +347,23 @@ export default function AboutPage() {
           >
             Our People
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <motion.div 
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } }
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+          >
             {partners.map((person, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                }}
                 onClick={() => setSelectedPartner(person)}
                 className="flex flex-col group cursor-pointer text-left"
               >
@@ -359,7 +383,7 @@ export default function AboutPage() {
                 </p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 

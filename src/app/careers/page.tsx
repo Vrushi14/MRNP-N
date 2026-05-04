@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import HereToHelp from "@/components/HereToHelp";
 
 const marqueeImages = [
   "https://res.cloudinary.com/dkhsnhjrh/image/upload/v1773911585/20250302_093152_zvu3n8.png",
@@ -46,7 +47,7 @@ export default function CareersPage() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="font-forum text-4xl md:text-5xl lg:text-6xl xl:text-[5rem] text-white leading-tight mb-3 md:mb-5"
+              className="font-forum text-4xl md:text-5xl lg:text-6xl xl:text-[5rem] 2xl:text-[6.5rem] md:leading-tight lg:leading-[5rem] xl:leading-[6.5rem] bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent pb-2"
             >
               Join Our Team
             </motion.h1>
@@ -54,7 +55,7 @@ export default function CareersPage() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-instrument text-white text-base md:text-lg lg:text-xl leading-relaxed max-w-3xl"
+              className="font-instrument text-base md:text-lg lg:text-xl xl:text-2xl text-white max-w-3xl leading-relaxed"
             >
               Students, recent graduates, seasoned professionals, and senior
               leaders constitute integral pillars of our success.
@@ -194,9 +195,21 @@ export default function CareersPage() {
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <motion.tbody
+                variants={{
+                  hidden: {},
+                  visible: { transition: { staggerChildren: 0.1 } }
+                }}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
                 {jobs.map((job, idx) => (
-                  <tr key={idx} className="border-b border-[#d9d9d9]">
+                  <motion.tr 
+                    key={idx} 
+                    variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
+                    className="border-b border-[#d9d9d9]"
+                  >
                     <td className="font-instrument text-[#191919] text-lg py-8 px-4 text-left">
                       {job.department}
                     </td>
@@ -218,16 +231,29 @@ export default function CareersPage() {
                         <ArrowRight className="w-5 h-5 ml-3 md:ml-4 text-white" />
                       </button>
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))}
-              </tbody>
+              </motion.tbody>
             </table>
           </div>
 
           {/* Mobile Cards */}
-          <div className="md:hidden mt-8 space-y-6">
+          <motion.div 
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.1 } }
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="md:hidden mt-8 space-y-6"
+          >
             {jobs.map((job, idx) => (
-              <div key={idx} className="border border-[#d9d9d9] rounded-lg p-4 space-y-3">
+              <motion.div 
+                key={idx} 
+                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
+                className="border border-[#d9d9d9] rounded-lg p-4 space-y-3"
+              >
                 <div className="flex flex-col">
                   <span className="font-instrument text-primaryBlue font-medium text-sm">
                     Department
@@ -267,12 +293,13 @@ export default function CareersPage() {
                   Apply Now
                   <ArrowRight className="w-5 h-5 ml-3 text-white" />
                 </button>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
+      <HereToHelp />
       <Footer />
 
       {/* ── SIDEBAR ── */}
@@ -360,36 +387,44 @@ export default function CareersPage() {
                 </div>
                 
                 <div className="px-6 pb-6 pt-4">
-                  <form className="space-y-3">
-                    <div>
+                  <motion.form 
+                    className="space-y-3"
+                    variants={{
+                      hidden: {},
+                      visible: { transition: { delayChildren: 0.3, staggerChildren: 0.1 } }
+                    }}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>
                       <input placeholder="Full Name *" className="font-instrument w-full px-4 py-3 bg-white border-2 border-[#d9d9d9] focus:border-primaryBlue focus:outline-none transition-colors placeholder:text-gray-500 rounded-sm" type="text" name="name" required />
-                    </div>
-                    <div>
+                    </motion.div>
+                    <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>
                       <input placeholder="Email Address *" className="font-instrument w-full px-4 py-3 bg-white border-2 border-[#d9d9d9] focus:border-primaryBlue focus:outline-none transition-colors placeholder:text-gray-500 rounded-sm" type="email" name="email" required />
-                    </div>
-                    <div>
+                    </motion.div>
+                    <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>
                       <input placeholder="Phone Number *" className="font-instrument w-full px-4 py-3 bg-white border-2 border-[#d9d9d9] focus:border-primaryBlue focus:outline-none transition-colors placeholder:text-gray-500 rounded-sm" type="tel" name="phone" required />
-                    </div>
-                    <div>
+                    </motion.div>
+                    <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>
                       <input placeholder="Education *" className="font-instrument w-full px-4 py-3 bg-white border-2 border-[#d9d9d9] focus:border-primaryBlue focus:outline-none transition-colors placeholder:text-gray-500 rounded-sm" type="text" name="education" required />
-                    </div>
-                    <div>
+                    </motion.div>
+                    <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>
                       <input placeholder="Current Company" className="font-instrument w-full px-4 py-3 bg-white border-2 border-[#d9d9d9] focus:border-primaryBlue focus:outline-none transition-colors placeholder:text-gray-500 rounded-sm" type="text" name="currentCompany" />
-                    </div>
-                    <div>
+                    </motion.div>
+                    <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>
                       <input placeholder="Years of Experience *" className="font-instrument w-full px-4 py-3 bg-white border-2 border-[#d9d9d9] focus:border-primaryBlue focus:outline-none transition-colors placeholder:text-gray-500 rounded-sm" type="text" name="experience" required />
-                    </div>
-                    <div>
+                    </motion.div>
+                    <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>
                       <label htmlFor="resume" className="font-instrument w-full px-4 py-3 bg-white border-2 border-[#d9d9d9] hover:border-primaryBlue transition-colors duration-300 ease-in-out flex items-center justify-between cursor-pointer rounded-sm">
                         <span className="text-gray-500">Upload Resume *</span>
                         <Upload className="w-5 h-5 text-gray-500" />
                       </label>
                       <input id="resume" className="hidden" accept=".pdf,.doc,.docx" type="file" name="resume" required />
-                    </div>
-                    <button type="submit" className="font-instrument w-full flex justify-center items-center text-white font-semibold bg-primaryBlue px-6 py-4 hover:bg-primaryBlue/90 transition-colors duration-300 ease-in-out mt-6 rounded-sm">
+                    </motion.div>
+                    <motion.button variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} type="submit" className="font-instrument w-full flex justify-center items-center text-white font-semibold bg-primaryBlue px-6 py-4 hover:bg-primaryBlue/90 transition-colors duration-300 ease-in-out mt-6 rounded-sm">
                       Submit Application
-                    </button>
-                  </form>
+                    </motion.button>
+                  </motion.form>
                 </div>
               </div>
             </motion.div>

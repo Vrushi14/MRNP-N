@@ -91,16 +91,26 @@ export default function Services() {
           </div>
         </div>
 
-        <div className="relative mx-auto grid grid-cols-1 lg:grid-cols-2 border-t border-gray-300 overflow-hidden rounded-xl">
+        <motion.div 
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.1 } }
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="relative mx-auto grid grid-cols-1 lg:grid-cols-2 border-t border-gray-300 overflow-hidden rounded-xl"
+        >
           <BorderBeam size={400} duration={12} delay={0} colorFrom="#38bdf8" colorTo="#3b82f6" />
           {services.map((service, index) => (
             <motion.div
               key={service.slug}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
-              className="relative flex border-b border-gray-300 lg:even:border-l bg-white/40 backdrop-blur-sm hover:bg-white/60 transition-colors duration-500"
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+              }}
+              whileHover={{ y: -4, boxShadow: "0px 10px 30px rgba(0,0,0,0.1)" }}
+              className="group relative flex border-b border-gray-300 lg:even:border-l bg-white/40 backdrop-blur-sm hover:bg-white/60 transition-colors duration-500"
             >
               <div className="flex flex-1 flex-col p-8 lg:px-12 lg:py-16">
                 <div className="mb-6">
@@ -110,6 +120,7 @@ export default function Services() {
                     width={64}
                     height={64}
                     className="h-16 w-16 object-contain"
+                    sizes="64px"
                   />
                 </div>
                 <h3 className="font-instrument mb-4 text-2xl font-medium text-primaryBlue lg:text-3xl">
@@ -120,16 +131,19 @@ export default function Services() {
                 </p>
                 <div className="mt-auto">
                   <Link
-                    className="font-instrument inline-block rounded-full border-2 border-primaryBlue px-8 py-3 text-base font-medium text-primaryBlue transition-all hover:bg-primaryBlue hover:text-white"
+                    className="font-instrument inline-flex items-center gap-2 rounded-full border-2 border-primaryBlue px-8 py-3 text-base font-medium text-primaryBlue transition-all hover:bg-primaryBlue hover:text-white"
                     href={`/services/${service.slug}`}
                   >
                     Learn More
+                    <svg className="w-4 h-4 transition-transform duration-250 ease-out group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
                   </Link>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

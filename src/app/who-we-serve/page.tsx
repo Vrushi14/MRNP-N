@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import CountUp from "react-countup";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import HereToHelp from "@/components/HereToHelp";
 
 export default function WhoWeServePage() {
   const industries = [
@@ -30,7 +32,7 @@ export default function WhoWeServePage() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="font-forum text-4xl md:text-5xl lg:text-6xl xl:text-[5rem] text-white leading-tight mb-3 md:mb-5"
+              className="font-forum text-4xl md:text-5xl lg:text-6xl xl:text-[5rem] 2xl:text-[6.5rem] md:leading-tight lg:leading-[5rem] xl:leading-[6.5rem] bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent pb-2"
             >
               Industries We Serve
             </motion.h1>
@@ -38,7 +40,7 @@ export default function WhoWeServePage() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-instrument text-white text-base md:text-lg lg:text-xl leading-relaxed max-w-3xl"
+              className="font-instrument text-base md:text-lg lg:text-xl xl:text-2xl text-white max-w-3xl leading-relaxed"
             >
               Discover the industries and clients we serve at MRNP. From healthcare
               to finance, we provide tailored solutions across diverse sectors.
@@ -53,17 +55,23 @@ export default function WhoWeServePage() {
           <div className="container mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3">
               <div className="relative flex flex-col items-center justify-center py-12 lg:py-16">
-                <h3 className="font-forum text-5xl lg:text-[5rem] text-primaryBlue mb-4">10+</h3>
+                <h3 className="font-forum text-5xl lg:text-[5rem] text-primaryBlue mb-4">
+                  <CountUp end={10} duration={2} enableScrollSpy scrollSpyOnce />+
+                </h3>
                 <p className="font-instrument text-base lg:text-2xl font-medium text-primaryBlue">Industries Served</p>
                 <div className="absolute right-0 top-12 bottom-12 hidden w-px bg-[#B4B4B4] md:block"></div>
               </div>
               <div className="relative flex flex-col items-center justify-center py-12 lg:py-16">
-                <h3 className="font-forum text-5xl lg:text-[5rem] text-primaryBlue mb-4">6</h3>
+                <h3 className="font-forum text-5xl lg:text-[5rem] text-primaryBlue mb-4">
+                  <CountUp end={6} duration={2} enableScrollSpy scrollSpyOnce />
+                </h3>
                 <p className="font-instrument text-base lg:text-2xl font-medium text-primaryBlue">Multi-State Presence</p>
                 <div className="absolute right-0 top-12 bottom-12 hidden w-px bg-[#B4B4B4] md:block"></div>
               </div>
               <div className="relative flex flex-col items-center justify-center py-12 lg:py-16">
-                <h3 className="font-forum text-5xl lg:text-[5rem] text-primaryBlue mb-4">13+</h3>
+                <h3 className="font-forum text-5xl lg:text-[5rem] text-primaryBlue mb-4">
+                  <CountUp end={13} duration={2} enableScrollSpy scrollSpyOnce />+
+                </h3>
                 <p className="font-instrument text-base lg:text-2xl font-medium text-primaryBlue">Years of Excellence</p>
               </div>
             </div>
@@ -197,10 +205,20 @@ export default function WhoWeServePage() {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4 lg:gap-5 w-full">
+          <motion.div 
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.1 } }
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="flex flex-wrap justify-center gap-4 lg:gap-5 w-full"
+          >
             {industries.map((industry, idx) => (
-              <div
+              <motion.div
                 key={idx}
+                variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
                 className="bg-[#F2F5F1] border border-[#d9d9d9] flex-shrink-0 w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.875rem)] lg:w-[calc(20%-1rem)]"
               >
                 <Image
@@ -213,12 +231,13 @@ export default function WhoWeServePage() {
                 <p className="font-instrument text-base md:text-lg lg:text-lg 2xl:text-xl text-primaryBlue py-4 font-medium text-center">
                   {industry.name}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
+      <HereToHelp />
       <Footer />
     </main>
   );

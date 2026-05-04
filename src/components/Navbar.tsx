@@ -34,7 +34,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/"
-                    className="flex justify-center items-center gap-x-1 text-white hover:text-white/80 transition-colors duration-200 ease-in-out text-base font-instrument"
+                    className="flex justify-center items-center gap-x-1 text-white hover:text-white/80 transition-colors duration-200 ease-in-out text-base font-instrument relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:-bottom-1 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
                   >
                     Home
                   </Link>
@@ -42,7 +42,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/about"
-                    className="flex justify-center items-center gap-x-1 text-white hover:text-white/80 transition-colors duration-200 ease-in-out text-base font-instrument"
+                    className="flex justify-center items-center gap-x-1 text-white hover:text-white/80 transition-colors duration-200 ease-in-out text-base font-instrument relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:-bottom-1 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
                   >
                     About MRNP
                   </Link>
@@ -50,7 +50,7 @@ export default function Navbar() {
                 <li className="relative">
                   <button
                     onClick={() => setIsServicesOpen(!isServicesOpen)}
-                    className="flex justify-center items-center gap-x-1 text-white hover:text-white/80 transition-colors duration-200 ease-in-out text-base cursor-pointer font-instrument focus:outline-none"
+                    className="flex justify-center items-center gap-x-1 text-white hover:text-white/80 transition-colors duration-200 ease-in-out text-base cursor-pointer font-instrument focus:outline-none relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:-bottom-1 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
                   >
                     Services
                     <motion.span
@@ -97,10 +97,10 @@ export default function Navbar() {
                   className="fixed inset-0 bg-black/20 backdrop-blur-sm -z-10 h-screen w-screen left-0 top-0"
                 />
                 <motion.div
-                  initial={{ opacity: 0, y: -20 }}
+                  initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.25 }}
                   className="absolute top-full left-0 right-0 mt-4 bg-white shadow-2xl p-8 md:p-12 z-50 border border-gray-100"
                 >
                   <div className="flex flex-col md:flex-row items-center gap-12 md:gap-24">
@@ -132,14 +132,12 @@ export default function Navbar() {
               </>
             )}
           </AnimatePresence>
-        </nav>
-      </div>
 
-      {/* ── MOBILE ACTION MENU (floating card) ── */}
-      <AnimatePresence>
-        {isMobileOpen && (
-          <>
-            {/* Backdrop */}
+          {/* ── MOBILE ACTION MENU (floating card) ── */}
+          <AnimatePresence>
+            {isMobileOpen && (
+              <>
+                {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -148,13 +146,13 @@ export default function Navbar() {
               className="fixed inset-0 z-[60]"
             />
 
-            {/* Floating card — top-right corner */}
+            {/* Floating card — below nav bar on the right */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: -10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -10 }}
               transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
-              className="fixed top-4 right-4 w-[280px] bg-white z-[70] rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
+              className="absolute top-full right-0 mt-4 w-[280px] bg-white z-[70] rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
             >
               {/* Close button */}
               <div className="flex justify-end px-4 pt-4 pb-1">
@@ -255,9 +253,11 @@ export default function Navbar() {
                 </p>
               </div>
             </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+              </>
+            )}
+          </AnimatePresence>
+        </nav>
+      </div>
     </div>
   );
 }

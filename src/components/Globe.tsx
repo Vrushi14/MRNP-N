@@ -10,13 +10,13 @@ export default function GlobeDisplay({ activeLocation }: { activeLocation?: stri
   const globeConfig = {
     pointSize: 4,
     globeColor: "#062056",
-    showAtmosphere: true,
+    showAtmosphere: false,
     atmosphereColor: "#FFFFFF",
     atmosphereAltitude: 0.1,
     emissive: "#062056",
     emissiveIntensity: 0.1,
     shininess: 0.9,
-    polygonColor: "rgba(255,255,255,0.7)",
+    polygonColor: "rgba(255, 255, 255, 0.4)",
     ambientLight: "#38bdf8",
     directionalLeftLight: "#ffffff",
     directionalTopLight: "#ffffff",
@@ -28,6 +28,7 @@ export default function GlobeDisplay({ activeLocation }: { activeLocation?: stri
     initialPosition: { lat: 22.3193, lng: 114.1694 },
     autoRotate: true,
     autoRotateSpeed: 0.5,
+    opacity: 0,
   };
   const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
   const sampleArcs = [

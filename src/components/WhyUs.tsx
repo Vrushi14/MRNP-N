@@ -32,10 +32,16 @@ const reasons = [
 
 export default function WhyUs() {
   return (
-    <section
-      className="relative w-full py-20 flex items-center bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/why-us.png')" }}
-    >
+    <section className="relative w-full py-20 flex items-center overflow-hidden">
+      <Image
+        src="/why-us.png"
+        alt=""
+        fill
+        className="object-cover object-center"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+        loading="lazy"
+        quality={80}
+      />
       <div className="absolute inset-0 bg-black/40"></div>
       <div className="relative z-10 w-full container mx-auto px-6 md:px-12 lg:px-16">
         <div className="mb-12 md:mb-16 lg:mb-20 max-w-4xl">
@@ -68,15 +74,24 @@ export default function WhyUs() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4">
+        <motion.div 
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.12 } }
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4"
+        >
           {reasons.map((reason, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+              }}
               whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
               className="bg-white py-14 px-6 md:px-8 space-y-4 shadow-sm hover:shadow-2xl transition-all duration-300 group rounded-xl"
             >
               <div className="w-12 h-12 md:w-16 md:h-16">
@@ -86,6 +101,7 @@ export default function WhyUs() {
                   width={58}
                   height={58}
                   className="w-full h-full object-contain"
+                  sizes="64px"
                 />
               </div>
               <h3 className="font-forum text-primaryBlue text-xl md:text-2xl">
@@ -96,7 +112,7 @@ export default function WhyUs() {
               </p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

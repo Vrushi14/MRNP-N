@@ -6,22 +6,30 @@ const forum = Forum({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-forum",
+  display: "swap",
+  preload: true,
 });
 
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
   variable: "--font-instrument-sans",
+  display: "swap",
+  preload: true,
 });
 
 const interTight = Inter_Tight({
   subsets: ["latin"],
   variable: "--font-inter-tight",
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
   title: "MRNP & Co. LLP | Chartered Accountants",
   description: "Smart approaches to solution with exceptional service. Talent and expertise necessary to meet our clients' needs in an ever-changing and fast-paced environment.",
 };
+
+import PageTransition from "@/components/PageTransition";
 
 export default function RootLayout({
   children,
@@ -33,7 +41,9 @@ export default function RootLayout({
       lang="en"
       className={`${forum.variable} ${instrumentSans.variable} ${interTight.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <PageTransition>{children}</PageTransition>
+      </body>
     </html>
   );
 }

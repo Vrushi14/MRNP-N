@@ -4,11 +4,11 @@ import { Color, Vector3, Group } from "three";
 import ThreeGlobe from "three-globe";
 import { useThree, Canvas, extend } from "@react-three/fiber";
 import { OrbitControls, Html } from "@react-three/drei";
-import countries from "@/data/globe.json";
+// import countries from "@/data/globe.json";
 declare module "@react-three/fiber" {
   interface ThreeElements {
     threeGlobe: ThreeElements["mesh"] & {
-      new (): ThreeGlobe;
+      new(): ThreeGlobe;
     };
   }
 }
@@ -52,6 +52,7 @@ export type GlobeConfig = {
   };
   autoRotate?: boolean;
   autoRotateSpeed?: number;
+  opacity?: number;
 };
 
 interface WorldProps {
@@ -66,6 +67,15 @@ export function Globe(props: WorldProps) {
   const globeRef = useRef<ThreeGlobe | null>(null);
   const groupRef = useRef<Group>(null);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [countries, setCountries] = useState<any>(null);
+
+  // Fetch globe data
+  useEffect(() => {
+    fetch("/globe.json")
+      .then((res) => res.json())
+      .then((data) => setCountries(data))
+      .catch((err) => console.error("Error loading globe data:", err));
+  }, []);
 
   const defaultProps = {
     pointSize: 1,
@@ -73,7 +83,7 @@ export function Globe(props: WorldProps) {
     showAtmosphere: true,
     atmosphereAltitude: 0.1,
     polygonColor: "rgba(255,255,255,0.7)",
-    globeColor: "#1d072e",
+    globeColor: "#c2b8caff",
     emissive: "#000000",
     emissiveIntensity: 0.1,
     shininess: 0.9,
@@ -81,6 +91,7 @@ export function Globe(props: WorldProps) {
     arcLength: 0.9,
     rings: 1,
     maxRings: 3,
+    opacity: 0.6,
     ...globeConfig,
   };
 
@@ -98,23 +109,27 @@ export function Globe(props: WorldProps) {
   // Build material when globe is initialized or when relevant props change
   useEffect(() => {
     if (!globeRef.current || !isInitialized) return;
-
     const globeMaterial = globeRef.current.globeMaterial() as unknown as {
       color: Color;
       emissive: Color;
       emissiveIntensity: number;
       shininess: number;
+      transparent: boolean;
+      opacity: number;
     };
-    globeMaterial.color = new Color(globeConfig.globeColor);
-    globeMaterial.emissive = new Color(globeConfig.emissive);
-    globeMaterial.emissiveIntensity = globeConfig.emissiveIntensity || 0.1;
-    globeMaterial.shininess = globeConfig.shininess || 0.9;
+    globeMaterial.color = new Color(defaultProps.globeColor);
+    globeMaterial.emissive = new Color(defaultProps.emissive);
+    globeMaterial.emissiveIntensity = defaultProps.emissiveIntensity ?? 0.1;
+    globeMaterial.shininess = defaultProps.shininess ?? 0.9;
+    globeMaterial.transparent = true;
+    globeMaterial.opacity = defaultProps.opacity ?? 0.6;
   }, [
     isInitialized,
-    globeConfig.globeColor,
-    globeConfig.emissive,
-    globeConfig.emissiveIntensity,
-    globeConfig.shininess,
+    defaultProps.globeColor,
+    defaultProps.emissive,
+    defaultProps.emissiveIntensity,
+    defaultProps.shininess,
+    defaultProps.opacity,
   ]);
 
   // Build data when globe is initialized or when data changes
@@ -151,14 +166,16 @@ export function Globe(props: WorldProps) {
         ) === i,
     );
 
-    globeRef.current
-      .hexPolygonsData(countries.features)
-      .hexPolygonResolution(3)
-      .hexPolygonMargin(0.7)
-      .showAtmosphere(defaultProps.showAtmosphere)
-      .atmosphereColor(defaultProps.atmosphereColor)
-      .atmosphereAltitude(defaultProps.atmosphereAltitude)
-      .hexPolygonColor(() => defaultProps.polygonColor);
+    if (countries) {
+      globeRef.current
+        .hexPolygonsData(countries.features)
+        .hexPolygonResolution(3)
+        .hexPolygonMargin(0.7)
+        .showAtmosphere(defaultProps.showAtmosphere)
+        .atmosphereColor(defaultProps.atmosphereColor)
+        .atmosphereAltitude(defaultProps.atmosphereAltitude)
+        .hexPolygonColor(() => defaultProps.polygonColor);
+    }
 
     globeRef.current
       .arcsData(data)
@@ -201,6 +218,7 @@ export function Globe(props: WorldProps) {
     defaultProps.arcTime,
     defaultProps.rings,
     defaultProps.maxRings,
+    countries,
   ]);
 
   // Handle rings animation with cleanup
@@ -243,7 +261,7 @@ export function Globe(props: WorldProps) {
       const targetLoc = props.locations.find(l => l.name === props.activeLocation);
       if (targetLoc) {
         const group = groupRef.current;
-        
+
         // Calculate target angles
         const camPos = new Vector3(0, 0, cameraZ); // Default camera position
         const camLng = Math.atan2(camPos.z, camPos.x);
@@ -256,7 +274,7 @@ export function Globe(props: WorldProps) {
         const currentY = group.rotation.y;
         let diffY = targetY - currentY;
         diffY = Math.atan2(Math.sin(diffY), Math.cos(diffY));
-        
+
         import("framer-motion").then(({ animate }) => {
           animate(group.rotation.y, group.rotation.y + diffY, {
             type: "spring",
@@ -294,20 +312,20 @@ function GlobeLabel({ loc, activeLocation }: { loc: { name: string, lat: number,
   const r = 100 + 2;
   const latRad = loc.lat * (Math.PI / 180);
   const lngRad = loc.lng * (Math.PI / 180);
-  
+
   // three-globe coordinate system: 0,0 is at [0, 0, R]
   const x = r * Math.cos(latRad) * Math.sin(lngRad);
   const y = r * Math.sin(latRad);
   const z = r * Math.cos(latRad) * Math.cos(lngRad);
 
   return (
-    <Html 
-      position={[x, y, z]} 
-      center 
+    <Html
+      position={[x, y, z]}
+      center
       distanceFactor={400}
       occlude
     >
-      <div 
+      <div
         ref={labelRef}
         style={{
           color: "white",
@@ -339,7 +357,7 @@ export function WebGLRendererConfig() {
 
 export function World(props: WorldProps) {
   const { globeConfig } = props;
-  
+
   return (
     <Canvas camera={{ position: [0, 0, cameraZ], fov: 45, near: 1, far: 2000 }}>
       <WebGLRendererConfig />
@@ -382,10 +400,10 @@ export function hexToRgb(hex: string) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16),
+    }
     : null;
 }
 

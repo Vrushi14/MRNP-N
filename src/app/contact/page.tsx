@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import HereToHelp from "@/components/HereToHelp";
 
 const offices = [
   {
@@ -55,7 +56,7 @@ const offices = [
     address: "3, 1st Floor, Royal Plaza, Nr. Cargo Honda Showroom, College Road, Bhuj (Kutch) - 370001",
     phone: "8200523428",
     email: "bhuj@mrnp.in",
-    mapQuery: "MRNP & CO LLP BHUJ",
+    mapQuery: "Royal Plaza, College Road, Bhuj, Gujarat 370001",
   }
 ];
 
@@ -94,11 +95,28 @@ export default function ContactPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Offices List */}
-            <div className="space-y-8 lg:space-y-10">
+            <motion.div 
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.1 } }
+              }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="space-y-8 lg:space-y-10"
+            >
               {offices.map((office, idx) => {
                 const isSelected = selectedOffice.city === office.city;
                 return (
-                  <div key={idx} className="space-y-3" onClick={() => setSelectedOffice(office)}>
+                  <motion.div 
+                    key={idx} 
+                    variants={{
+                      hidden: { opacity: 0, y: 30 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                    }}
+                    className="space-y-3 border-l-4 border-transparent pl-4 hover:border-primaryBlue transition-colors duration-[250ms] cursor-pointer" 
+                    onClick={() => setSelectedOffice(office)}
+                  >
                     <h3 className="font-instrument cursor-pointer text-2xl lg:text-[1.75rem] font-medium text-primaryBlue">
                       {office.city}
                     </h3>
@@ -131,10 +149,10 @@ export default function ContactPage() {
                         <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
 
             {/* Sticky Map */}
             <div className="relative">
@@ -169,6 +187,7 @@ export default function ContactPage() {
         </div>
       </section>
       
+      <HereToHelp />
       <Footer />
     </main>
   );

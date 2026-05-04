@@ -38,7 +38,7 @@ export default function HereToHelp() {
             >
               <Link
                 href="/contact"
-                className="font-instrument font-semibold inline-block px-8 md:px-10 py-3 md:py-4 bg-primaryBlue text-white text-base rounded-full hover:bg-primaryBlue/90 transition-colors duration-300"
+                className="font-instrument font-semibold inline-block px-8 md:px-10 py-3 md:py-4 bg-primaryBlue text-white text-base rounded-full hover:bg-primaryBlue/90 hover:scale-[1.03] transition-all duration-200 ease-in-out"
               >
                 Contact Us
               </Link>
@@ -54,8 +54,8 @@ export default function HereToHelp() {
           alt=""
           width={1920}
           height={200}
-          className="w-full h-auto"
-          priority
+          className="w-full h-auto animate-float"
+          loading="lazy"
         />
       </div>
     </section>
