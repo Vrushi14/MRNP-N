@@ -47,10 +47,7 @@ export function AnimatedSection({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      initial={{ opacity: 1, y: 0 }}
       className="mb-10"
     >
       {heading && (
@@ -108,10 +105,7 @@ export function AnimatedSection({
 export function AnimatedImage({ src, alt }: { src: string; alt: string }) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.97 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      viewport={{ once: true }}
+      initial={{ opacity: 1, scale: 1 }}
       className="relative w-full aspect-[16/9] mb-10 overflow-hidden bg-gray-100"
     >
       <Image
