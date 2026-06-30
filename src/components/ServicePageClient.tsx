@@ -1,33 +1,65 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, LayoutGroup } from "framer-motion";
 import { servicesData } from "@/data/services";
 
+const ORDERED_SLUGS = [
+  "audit-and-assurance",
+  "Business-Consultancy-and-Advisory",
+  "Changes-in-Accounting-Standards-and-Legislations",
+  "Governance-and-Risk-Management",
+  "management-recommendations",
+  "Tax-Consultancy"
+];
+
+const sortServices = (list: any[]) => {
+  return [...list].sort((a, b) => {
+    const indexA = ORDERED_SLUGS.findIndex(slug => slug.toLowerCase() === a.slug?.toLowerCase());
+    const indexB = ORDERED_SLUGS.findIndex(slug => slug.toLowerCase() === b.slug?.toLowerCase());
+    return (indexA === -1 ? 999 : indexA) - (indexB === -1 ? 999 : indexB);
+  });
+};
+
 export function ServiceSidebar({ currentSlug }: { currentSlug: string }) {
+  const [services, setServices] = useState<any[]>(() => sortServices(servicesData));
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+        const res = await fetch(`${apiUrl}/services`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.services && data.services.length > 0) {
+            setServices(sortServices(data.services));
+          }
+        }
+      } catch (err) {
+        console.warn("Failed to fetch services in Sidebar:", err);
+      }
+    };
+    fetchServices();
+  }, []);
+
   return (
     <LayoutGroup>
-      <nav className="flex flex-col">
-        {servicesData.map((s) => {
+      <nav className="flex flex-col border border-slate-200 shadow-sm bg-white">
+        {services.map((s) => {
           const isActive = s.slug === currentSlug;
           return (
             <Link
               key={s.slug}
               href={`/services/${s.slug}`}
-              className={`relative block px-6 py-2 font-instrument text-base md:text-lg ${
-                isActive ? "text-white" : "bg-white text-primaryBlue hover:bg-gray-50 transition-colors"
+              className={`block px-6 py-3.5 font-instrument text-sm md:text-base border-b border-slate-200 last:border-b-0 transition-colors duration-150 ${
+                isActive 
+                  ? "bg-primaryBlue text-white font-medium" 
+                  : "bg-white text-primaryBlue hover:bg-slate-50"
               }`}
             >
-              {isActive && (
-                <motion.div
-                  layoutId="active-tab"
-                  className="absolute inset-0 bg-primaryBlue"
-                  initial={false}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10">{s.title}</span>
+              {s.title}
             </Link>
           );
         })}
@@ -103,6 +135,7 @@ export function AnimatedSection({
 }
 
 export function AnimatedImage({ src, alt }: { src: string; alt: string }) {
+  if (!src) return null;
   return (
     <motion.div
       initial={{ opacity: 1, scale: 1 }}

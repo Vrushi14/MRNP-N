@@ -1,16 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { servicesData } from "@/data/services";
 
+const ORDERED_SLUGS = [
+  "audit-and-assurance",
+  "Business-Consultancy-and-Advisory",
+  "Changes-in-Accounting-Standards-and-Legislations",
+  "Governance-and-Risk-Management",
+  "management-recommendations",
+  "Tax-Consultancy"
+];
+
+const sortServices = (list: any[]) => {
+  return [...list].sort((a, b) => {
+    const indexA = ORDERED_SLUGS.findIndex(slug => slug.toLowerCase() === a.slug?.toLowerCase());
+    const indexB = ORDERED_SLUGS.findIndex(slug => slug.toLowerCase() === b.slug?.toLowerCase());
+    return (indexA === -1 ? 999 : indexA) - (indexB === -1 ? 999 : indexB);
+  });
+};
+
 export default function Navbar() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [services, setServices] = useState<any[]>(() => sortServices(servicesData));
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+        const res = await fetch(`${apiUrl}/services`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.services && data.services.length > 0) {
+            setServices(sortServices(data.services));
+          }
+        }
+      } catch (err) {
+        console.warn("Failed to fetch services in Navbar:", err);
+      }
+    };
+    fetchServices();
+  }, []);
 
   return (
     <div className="flex justify-center items-center bg-transparent z-50 absolute top-2 left-0 right-0">
@@ -110,7 +146,7 @@ export default function Navbar() {
                       </h2>
                     </div>
                     <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-                      {servicesData.map((service) => (
+                      {services.map((service) => (
                         <Link
                           key={service.slug}
                           href={`/services/${service.slug}`}
@@ -206,7 +242,7 @@ export default function Navbar() {
                         transition={{ duration: 0.2 }}
                         className="overflow-hidden bg-gray-50"
                       >
-                        {servicesData.map((service) => (
+                        {services.map((service) => (
                           <Link
                             key={service.slug}
                             href={`/services/${service.slug}`}

@@ -1,26 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FAF9F6;
+  --foreground: #191919;
   --primary-blue: #061143;
+  --border-color: #e5e7eb;
+  --card-bg: #ffffff;
+}
+
+.dark {
+  --background: #0b0f19;
+  --foreground: #f3f4f6;
+  --primary-blue: #60a5fa;
+  --border-color: #1e293b;
+  --card-bg: #111827;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primaryBlue: var(--primary-blue);
+  --color-borderCustom: var(--border-color);
+  --color-cardBg: var(--card-bg);
 
   --font-forum: var(--font-forum);
   --font-instrument: var(--font-instrument-sans);
   --font-inter: var(--font-inter-tight);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
@@ -44,7 +49,7 @@ p, li {
 }
 
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 60s linear infinite;
 }
 
 
